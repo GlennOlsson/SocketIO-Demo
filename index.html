@@ -38,9 +38,19 @@
         });
         socket.on('disconnect', function(){}); 
         socket.on("message", json => {
+            if(!json.username || !json.content){
+                return;
+            }
             let newMessage = document.createElement("div");
             newMessage.setAttribute("class", "message")
             newMessage.innerHTML = "<b>" + json.username + "</b><p>" + json.content + "</p>";
+            delete json.username;
+            delete json.content;
+            Object.keys(json).forEach(key => {
+                let comp = document.createElement("p");
+                comp.innerHTML = key + ": " + json[key];
+                newMessage.appendChild(comp);
+            });
             console.log(json)
             document.getElementById("content").appendChild(newMessage);
         })

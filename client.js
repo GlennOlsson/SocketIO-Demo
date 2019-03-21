@@ -2,6 +2,10 @@ let io = require('socket.io-client');
 var readline = require('readline');
 const socket = io("http://192.168.1.116:3000");
 
+// ----------------
+// UPDATE IP
+// ----------------
+
 var rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout,
@@ -15,8 +19,7 @@ socket.on("message", (mess) => {
 rl.on("line", (line) => {
     console.log("INPUT: " + line);
     socket.emit("message", {
-        content: line,
-        username: "FEL ANVÄNDARE"
+        vafan: "händer?"
     });
 });
 
